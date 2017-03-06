@@ -36,11 +36,11 @@
       "name": "ghost",
       "framework": "node4.7",
       "memory": {
-        "required": 386,
-        "recommended": 512
+        "required": "386",
+        "recommended": "512"
       },
       "http_protocol": "http_and_https",
-      "framework_port_override": "",
+      "framework_port_override": "2368",
       "deployment_type": "web",
       "web_root_directory": "",
       "continuous_deployment": false,
@@ -120,24 +120,24 @@
         "name": "DEBUG",
         "value": "false",
         "mandatory": false,
+        "immutable": false,
         "ask_at_build_time": false,
         "build_time_only": false,
-        "immutable": false,
         "input": {
-          "label": "DEBUG",
           "type": "boolean",
+          "label": "DEBUG",
           "title": "",
           "comment": "",
           "hint": "",
           "placeholder": "",
-          "collection": {
-            "items": {
-            },
-            "include_blank": false
-          },
           "validation": {
             "pattern": "",
             "message": ""
+          },
+          "collection": {
+            "include_blank": false,
+            "items": {
+            }
           }
         }
       }
