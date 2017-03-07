@@ -39,7 +39,7 @@
         "required": "386",
         "recommended": "512"
       },
-      "http_protocol": "http_and_https",
+      "http_protocol": "https_and_http",
       "framework_port_override": "2368",
       "deployment_type": "web",
       "web_root_directory": "",
