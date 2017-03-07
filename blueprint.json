@@ -36,11 +36,11 @@
       "name": "ghost",
       "framework": "node4.7",
       "memory": {
-        "required": "386",
-        "recommended": "512"
+        "required": 386,
+        "recommended": 512
       },
       "http_protocol": "https_and_http",
-      "framework_port_override": "2368",
+      "framework_port_override": 2368,
       "deployment_type": "web",
       "web_root_directory": "",
       "continuous_deployment": false,
@@ -54,7 +54,7 @@
     "scripts": {
       "start": {
         "language": "sh",
-        "content": "#!/bin/bash\r\nPID_FILE=/var/run/engines/pid\r\nexport PID_FILE\r\nif ! test -f  /home/fs/config_and_data/.configured\r\n then\r\n    cp -r /home/fs_src/config_and_data /home/fs\r\n    touch /home/fs/config_and_data/.configured\r\n fi\r\n. /home/trap.sh\r\nmkdir -p  /engines/var/run/flags/\r\ncd /home/app\r\n\r\n npm start --production > /var/log/ghost.log &\r\n\r\npid=$!\r\necho $pid >$PID_FILE\r\ntouch /engines/var/run/flags/startup_complete\r\nwait\r\n\r\nrm /engines/var/run/flags/startup_complete"
+        "content": "#!/bin/bash\r\nPID_FILE=/var/run/engines/pid\r\nexport PID_FILE\r\nif ! test -f  /home/fs/config_and_data/.configured\r\n then\r\n    cp -r /home/fs_src/config_and_data /home/fs\r\n    touch /home/fs/config_and_data/.configured\r\n fi\r\n. /home/trap.sh\r\nmkdir -p  /engines/var/run/flags/\r\ncd /home/app\r\n\r\n npm start --production > /var/log/ghost.log &\r\n\r\npid=$!\r\necho $pid >$PID_FILE\r\ntouch /engines/var/run/flags/startup_complete\r\nwait\r\n\r\nif ! test -z $DEBUG\r\n then\r\n  sleep 600\r\n fi\r\nrm /engines/var/run/flags/startup_complete"
       },
       "install": {
         "language": "sh",
