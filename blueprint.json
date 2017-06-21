@@ -5,7 +5,7 @@
       "major": 1,
       "minor": 0
     },
-    "origin": "Engines Developer Studio 1.0"
+    "origin": "Engines Developer Studio 0.2"
   },
   "metadata": {
     "blueprint": {
@@ -14,14 +14,12 @@
         "minor": 1,
         "level": "alpha",
         "patch": 0
-      },
-      "timestamp": null
+      }
     },
     "software": {
       "display": {
         "title": "ghost",
         "label": "ghost",
-        "version": "",
         "description": "Ghost is an open source publishing platform which is beautifully designed, easy to use, and free for everyone. ",
         "url": "https://ghost.org/"
       },
@@ -29,63 +27,46 @@
         "label": "MIT",
         "url": "https://opensource.org/licenses/MIT"
       }
-    }
+    },
+    "timestamp": "2017-06-22T09:41:35+10:00"
   },
   "software": {
     "base": {
       "name": "ghost",
       "framework": "node4.7",
+      "deployment_type": "web",
+      "http_protocol": "https_and_http",
+      "framework_port_override": 2368,
       "memory": {
         "required": 386,
         "recommended": 512
       },
-      "http_protocol": "https_and_http",
-      "framework_port_override": 2368,
-      "deployment_type": "web",
-      "web_root_directory": "",
-      "continuous_deployment": false,
-      "install_form_comment": "",
       "first_run_url": "_Engines_Builder(http_protocol)://_Engines_Builder(fqdn)/ghost/setup/",
       "installation_report": "Goto to _Engines_Builder(http_protocol)://_Engines_Builder(fqdn)/ghost/setup/ and follow the instructions"
     },
-    "ports": [
-
-    ],
     "scripts": {
       "start": {
         "language": "sh",
-        "content": "#!/bin/bash\r\nPID_FILE=/var/run/engines/pid\r\nexport PID_FILE\r\nif ! test -f  /home/fs/config_and_data/.configured\r\n then\r\n    cp -r /home/fs_src/config_and_data /home/fs\r\n    touch /home/fs/config_and_data/.configured\r\n fi\r\n. /home/trap.sh\r\nmkdir -p  /engines/var/run/flags/\r\ncd /home/app\r\n\r\n npm start --production > /var/log/ghost.log &\r\n\r\npid=$!\r\necho $pid >$PID_FILE\r\ntouch /engines/var/run/flags/startup_complete\r\nwait\r\n\r\nif ! test -z $DEBUG\r\n then\r\n  sleep 600\r\n fi\r\nrm /engines/var/run/flags/startup_complete"
+        "content": "#!/bin/bash\r\nPID_FILE=/var/run/engines/pid\r\nexport PID_FILE\r\nif ! test -f  /home/fs/config_and_data/.configured\r\n then\r\n    cp -r /home/fs_src/config_and_data /home/fs\r\n    touch /home/fs/config_and_data/.configured\r\n fi\r\n. /home/engines/functions/trap.sh\r\nmkdir -p  /engines/var/run/flags/\r\ncd /home/app\r\n\r\n npm start --production > /var/log/ghost.log &\r\n\r\npid=$!\r\necho $pid >$PID_FILE\r\ntouch /engines/var/run/flags/startup_complete\r\nwait\r\n\r\n\r\nrm /engines/var/run/flags/startup_complete\r\nexit"
       },
       "install": {
         "language": "sh",
         "content": "#!/bin/bash\r\ncd /home/app\r\nnpm update npm\r\nnpm install --production "
       },
       "post_install": {
-        "language": "sh",
-        "content": ""
+        "language": "sh"
       },
       "shutdown": {
-        "language": "sh",
-        "content": ""
+        "language": "sh"
       }
     },
-    "external_repositories": [
-
-    ],
-    "system_packages": [
-
-    ],
     "installed_packages": [
       {
         "name": "Ghost-0.11.3.zip",
         "source_url": "https://github.com/TryGhost/Ghost/releases/download/0.11.3/Ghost-0.11.3.zip",
         "destination": "./",
-        "extraction_command": "unzip -u",
-        "path_to_extracted": ""
+        "extraction_command": "unzip -u"
       }
-    ],
-    "required_modules": [
-
     ],
     "service_configurations": [
       {
@@ -119,26 +100,9 @@
       {
         "name": "DEBUG",
         "value": "false",
-        "mandatory": false,
-        "immutable": false,
-        "ask_at_build_time": false,
-        "build_time_only": false,
         "input": {
           "type": "boolean",
-          "label": "DEBUG",
-          "title": "",
-          "comment": "",
-          "hint": "",
-          "placeholder": "",
-          "validation": {
-            "pattern": "",
-            "message": ""
-          },
-          "collection": {
-            "include_blank": false,
-            "items": {
-            }
-          }
+          "label": "DEBUG"
         }
       }
     ],
@@ -149,18 +113,12 @@
         "content": "// # Ghost Configuration\r\n// Setup your Ghost install for various [environments](http://support.ghost.org/config/#about-environments).\r\n\r\n// Ghost runs in `development` mode by default. Full documentation can be found at http://support.ghost.org/config/\r\n\r\nvar path = require('path'),\r\n    config;\r\n\r\nconfig = {\r\n    // ### Production\r\n    // When running Ghost in the wild, use the production environment.\r\n    // Configure your URL and mail settings here\r\n    production: {\r\n\r\n        url: 'http://_Engines_Builder(fqdn)/',\r\n        urlSSL: 'https://_Engines_Builder(fqdn)/',\r\n         forceAdminSSL: {redirect: true},\r\n        mail: {\r\n        transport: 'SMTP',\r\n            options: {\r\n            secure: false,\r\n            host: '_Engines_System(smtp_host)',\r\n            port: 25\r\n           }\r\n        },\r\n database: {\r\n            client: 'mysql',\r\n            connection: {\r\n                host     : '_Engines_Environment(dbhost)',\r\n                user     : '_Engines_Environment(dbname)',\r\n                password : '_Engines_Environment(dbpasswd)',\r\n                database : '_Engines_Environment(dbname)',\r\n                charset  : 'utf8'\r\n            }\r\n        },\r\n debug: false,\r\n        server: {\r\n            host: '0.0.0.0',\r\n            port: '2368'\r\n        }\r\n    }\r\n};\r\n\r\nmodule.exports = config;\r\n"
       }
     ],
-    "replacement_strings": [
-
-    ],
     "database_seed": {
-      "language": "text",
-      "content": "",
-      "script": false
+      "language": "text"
     },
     "file_write_permissions": [
       {
-        "path": "npm-debug.log",
-        "recursive": false
+        "path": "npm-debug.log"
       }
     ],
     "persistent_directories": [
@@ -172,37 +130,6 @@
       {
         "path": "app/config.js"
       }
-    ],
-    "components": {
-      "sources": [
-
-      ],
-      "path": "",
-      "extract": false
-    },
-    "workers": {
-      "blocking": "",
-      "commands": [
-
-      ]
-    },
-    "rake_tasks": [
-
-    ],
-    "custom_php_inis": [
-
-    ],
-    "apache_htaccess_files": [
-
-    ],
-    "apache_httpd_configurations": [
-
-    ],
-    "actionators": [
-
-    ],
-    "schedules": [
-
     ]
   }
 }
