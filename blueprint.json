@@ -2,8 +2,8 @@
   "schema": {
     "type": "app_blueprint",
     "version": {
-      "major": 1,
-      "minor": 0
+      "major": 0,
+      "minor": 1
     },
     "origin": "Engines Developer Studio 0.2"
   },
@@ -28,7 +28,7 @@
         "url": "https://opensource.org/licenses/MIT"
       }
     },
-    "timestamp": "2017-06-22T09:41:35+10:00"
+    "timestamp": "2018-02-20T09:11:39+11:00"
   },
   "software": {
     "base": {
@@ -62,8 +62,8 @@
     },
     "installed_packages": [
       {
-        "name": "Ghost-0.11.3.zip",
-        "source_url": "https://github.com/TryGhost/Ghost/releases/download/0.11.3/Ghost-0.11.3.zip",
+        "name": "Ghost-1.21.2.zip",
+        "source_url": "https://github.com/TryGhost/Ghost/releases/download/1.21.2/Ghost-1.21.2.zip",
         "destination": "./",
         "extraction_command": "unzip -u"
       }
@@ -85,13 +85,11 @@
         "publisher_namespace": "EnginesSystem",
         "type_path": "database/sql/mysql",
         "variables": {
-          "collation": "utf8_general_ci",
-          "db_flavor": "mysql2",
-          "db_password": "_Engines_System(random(10))",
-          "db_username": "_Engines_Builder(engine_name)",
           "database_name": "_Engines_Builder(engine_name)",
           "database_host": "_Engines_System(mysql_host)",
-          "name": "_Engines_Builder(engine_name)",
+          "db_username": "_Engines_Builder(engine_name)",
+          "db_password": "_Engines_System(random(10))",
+          "collation": "utf8_general_ci",
           "full_access": "false"
         }
       }
