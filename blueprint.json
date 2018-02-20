@@ -28,7 +28,7 @@
         "url": "https://opensource.org/licenses/MIT"
       }
     },
-    "timestamp": "2018-02-20T12:23:24+11:00"
+    "timestamp": "2018-02-20T12:38:32+11:00"
   },
   "software": {
     "base": {
@@ -67,7 +67,7 @@
         "publisher_namespace": "EnginesSystem",
         "type_path": "filesystem/local/filesystem",
         "variables": {
-          "engine_path": "persistence",
+          "engine_path": "/home/app/",
           "permissions": "rw",
           "volume_src": " ",
           "service_name": "persistence",
@@ -104,12 +104,6 @@
     "file_write_permissions": [
       {
         "path": "npm-debug.log"
-      }
-    ],
-    "persistent_directories": [
-      {
-        "path": "/home/app/",
-        "volume_name": "persistence"
       }
     ]
   }
