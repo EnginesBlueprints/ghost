@@ -28,7 +28,7 @@
         "url": "https://opensource.org/licenses/MIT"
       }
     },
-    "timestamp": "2018-02-20T11:27:39+11:00"
+    "timestamp": "2018-02-20T11:33:34+11:00"
   },
   "software": {
     "base": {
@@ -70,7 +70,7 @@
           "engine_path": "persistence",
           "permissions": "rw",
           "volume_src": " ",
-          "service_name": "_Engines_Builder(engine_name)",
+          "service_name": "persistence",
           "group": "_Engines_Builder(data_gid)",
           "user": "_Engines_Builder(data_uid)"
         }
