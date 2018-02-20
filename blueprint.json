@@ -28,18 +28,18 @@
         "url": "https://opensource.org/licenses/MIT"
       }
     },
-    "timestamp": "2018-02-20T12:38:32+11:00"
+    "timestamp": "2018-02-20T13:28:42+11:00"
   },
   "software": {
     "base": {
       "name": "ghost",
       "framework": "node6.9",
       "deployment_type": "web",
-      "http_protocol": "https_and_http",
-      "framework_port_override": 2368,
+      "http_protocol": "http_and_https",
+      "framework_port_override": 9001,
       "continuous_deployment": true,
       "memory": {
-        "required": 386,
+        "required": 368,
         "recommended": 512
       },
       "first_run_url": "_Engines_Builder(http_protocol)://_Engines_Builder(fqdn)/ghost/setup/",
