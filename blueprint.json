@@ -28,7 +28,7 @@
         "url": "https://opensource.org/licenses/MIT"
       }
     },
-    "timestamp": "2018-02-20T11:33:34+11:00"
+    "timestamp": "2018-02-20T12:23:24+11:00"
   },
   "software": {
     "base": {
@@ -48,7 +48,7 @@
     "scripts": {
       "start": {
         "language": "sh",
-        "content": "#!/bin/bash\r\nPID_FILE=/var/run/engines/pid\r\nexport PID_FILE\r\nif ! test -f  /home/fs/config_and_data/.configured\r\n then\r\n    cp -r /home/fs_src/config_and_data /home/fs\r\n    touch /home/fs/config_and_data/.configured\r\n fi\r\n. /home/engines/functions/trap.sh\r\n\r\ncd /home/app\r\n\r\nnpm start --production > /var/log/ghost.log &\r\npid=$!\r\necho $pid >$PID_FILE\r\n\r\nstartup_complete\r\n\r\nwait\r\nsleep 600\r\nshutdown_complete\r\n\r\nexit"
+        "content": "#!/bin/bash\r\nPID_FILE=/home/engines/run/pid\r\nexport PID_FILE\r\n\r\n. /home/engines/functions/trap.sh\r\n\r\ncd /home/app\r\n\r\n\r\nnpm start --production > /var/log/ghost.log &\r\npid=$!\r\necho $pid >$PID_FILE\r\n\r\nstartup_complete\r\n\r\nwait\r\nsleep 600\r\nshutdown_complete\r\n\r\nexit"
       },
       "install": {
         "language": "sh",
