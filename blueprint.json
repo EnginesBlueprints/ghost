@@ -28,7 +28,7 @@
         "url": "https://opensource.org/licenses/MIT"
       }
     },
-    "timestamp": "2018-02-20T11:24:48+11:00"
+    "timestamp": "2018-02-20T11:27:39+11:00"
   },
   "software": {
     "base": {
@@ -37,6 +37,7 @@
       "deployment_type": "web",
       "http_protocol": "https_and_http",
       "framework_port_override": 2368,
+      "continuous_deployment": true,
       "memory": {
         "required": 386,
         "recommended": 512
@@ -107,7 +108,7 @@
     ],
     "persistent_directories": [
       {
-        "path": "/app",
+        "path": "/home/app/",
         "volume_name": "persistence"
       }
     ]
