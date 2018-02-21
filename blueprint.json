@@ -28,7 +28,7 @@
         "url": "https://opensource.org/licenses/MIT"
       }
     },
-    "timestamp": "2018-02-20T13:28:42+11:00"
+    "timestamp": "2018-02-21T17:55:39+11:00"
   },
   "software": {
     "base": {
@@ -48,7 +48,7 @@
     "scripts": {
       "start": {
         "language": "sh",
-        "content": "#!/bin/bash\r\nPID_FILE=/home/engines/run/pid\r\nexport PID_FILE\r\n\r\n. /home/engines/functions/trap.sh\r\n\r\ncd /home/app\r\n\r\n\r\nnpm start --production > /var/log/ghost.log &\r\npid=$!\r\necho $pid >$PID_FILE\r\n\r\nstartup_complete\r\n\r\nwait\r\nsleep 600\r\nshutdown_complete\r\n\r\nexit"
+        "content": "#!/bin/bash\r\nPID_FILE=/home/engines/run/pid\r\nexport PID_FILE\r\n\r\n. /home/engines/functions/trap.sh\r\n\r\ncd /home/app\r\n\r\n\r\nghost start\r\nstartup_complete\r\nwhile ! test -f /home/engines/run/flags/sig_term\r\n do\r\n sleep 10&\r\n echo $! > /home/engines/run/pid\r\n wait\r\ndone\r\n\r\nghost stop\r\n\r\n\r\nshutdown_complete\r\n\r\nexit"
       },
       "install": {
         "language": "sh",
