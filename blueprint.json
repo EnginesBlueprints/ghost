@@ -28,7 +28,7 @@
         "url": "https://opensource.org/licenses/MIT"
       }
     },
-    "timestamp": "2018-02-22T14:12:24+11:00"
+    "timestamp": "2018-02-22T15:27:21+11:00"
   },
   "software": {
     "base": {
@@ -56,7 +56,7 @@
       },
       "post_install": {
         "language": "sh",
-        "content": "#!/bin/bash\r\ncd /home/app\r\n/home/engines/scripts/grant_ugo_r_access.sh /home/app\r\nghost install   --url _Engines_Builder(http_protocol)://_Engines_Builder(fqdn)\\\r\n                --admin-url https://_Engines_Builder(fqdn)/ \\\r\n                --port 9001 \\\r\n                --ip 0.0.0.0 \\\r\n                --db mysql \\\r\n                --dbhost $dbhost \\\r\n                --dbuser $dbuser \\\r\n                --dbpass $dbpasswd \\\r\n                --dbname $dbname \\\r\n                --mail smtp \\\r\n                --mailhost _Engines_System(smtp_host) \\\r\n                --mailport 25 \\\r\n                -l "
+        "content": "#!/bin/bash\r\ncd /home/app\r\n\r\nghost install   --url _Engines_Builder(http_protocol)://_Engines_Builder(fqdn)\\\r\n                --admin-url https://_Engines_Builder(fqdn)/ \\\r\n                --port 9001 \\\r\n                --ip 0.0.0.0 \\\r\n                --db mysql \\\r\n                --dbhost $dbhost \\\r\n                --dbuser $dbuser \\\r\n                --dbpass $dbpasswd \\\r\n                --dbname $dbname \\\r\n                --mail smtp \\\r\n                --mailhost _Engines_System(smtp_host) \\\r\n                --mailport 25 \\\r\n                -l \r\n                \r\n                \r\n cp config.development.json config.production.json               "
       },
       "shutdown": {
         "language": "sh"
