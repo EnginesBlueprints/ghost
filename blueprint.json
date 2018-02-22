@@ -28,7 +28,7 @@
         "url": "https://opensource.org/licenses/MIT"
       }
     },
-    "timestamp": "2018-02-22T15:27:21+11:00"
+    "timestamp": "2018-02-22T18:11:13+11:00"
   },
   "software": {
     "base": {
@@ -48,7 +48,7 @@
     "scripts": {
       "start": {
         "language": "sh",
-        "content": "#!/bin/bash\r\nPID_FILE=/home/engines/run/pid\r\nexport PID_FILE\r\n\r\n. /home/engines/functions/trap.sh\r\n\r\ncd /home/app\r\n\r\n\r\nghost start\r\nstartup_complete\r\nwhile ! test -f /home/engines/run/flags/sig_term\r\n do\r\n sleep 10&\r\n echo $! > /home/engines/run/pid\r\n wait\r\ndone\r\n\r\nghost stop\r\n\r\n\r\nshutdown_complete\r\n\r\nexit"
+        "content": "#!/bin/bash\r\nPID_FILE=/home/engines/run/pid\r\nexport PID_FILE\r\n\r\n. /home/engines/functions/trap.sh\r\n\r\ncd /home/app\r\n\r\n\r\nghost start\r\nstartup_complete\r\nwhile ! test -f /home/engines/run/flags/sig_term\r\n do\r\n sleep 10&\r\n echo $! > $PID_FILE\r\n wait\r\ndone\r\n\r\nghost stop\r\n\r\n\r\nshutdown_complete\r\n\r\nexit"
       },
       "install": {
         "language": "sh",
@@ -56,7 +56,7 @@
       },
       "post_install": {
         "language": "sh",
-        "content": "#!/bin/bash\r\ncd /home/app\r\n\r\nghost install   --url _Engines_Builder(http_protocol)://_Engines_Builder(fqdn)\\\r\n                --admin-url https://_Engines_Builder(fqdn)/ \\\r\n                --port 9001 \\\r\n                --ip 0.0.0.0 \\\r\n                --db mysql \\\r\n                --dbhost $dbhost \\\r\n                --dbuser $dbuser \\\r\n                --dbpass $dbpasswd \\\r\n                --dbname $dbname \\\r\n                --mail smtp \\\r\n                --mailhost _Engines_System(smtp_host) \\\r\n                --mailport 25 \\\r\n                -l \r\n                \r\n                \r\n cp config.development.json config.production.json               "
+        "content": "#!/bin/bash\r\ncd /home/app\r\n\r\nghost install   --url _Engines_Builder(http_protocol)://_Engines_Builder(fqdn)\\\r\n                --admin-url https://_Engines_Builder(fqdn)/ \\\r\n                --port 9001 \\\r\n                --ip 0.0.0.0 \\\r\n                --db mysql \\\r\n                --dbhost $dbhost \\\r\n                --dbuser $dbuser \\\r\n                --dbpass $dbpasswd \\\r\n                --dbname $dbname \\\r\n                --mail smtp \\\r\n                --mailhost _Engines_System(smtp_host) \\\r\n                --mailport 25 \\\r\n                -l \r\n                \r\n                \r\n cp config.development.json /home/fs/content/config.production.json\r\n ln -s /home/fs/content/config.production.json /home/app/\r\n "
       },
       "shutdown": {
         "language": "sh"
@@ -67,10 +67,10 @@
         "publisher_namespace": "EnginesSystem",
         "type_path": "filesystem/local/filesystem",
         "variables": {
-          "engine_path": "/home/app/",
+          "engine_path": "",
           "permissions": "rw",
           "volume_src": " ",
-          "service_name": "persistence",
+          "service_name": "content",
           "group": "_Engines_Builder(data_gid)",
           "user": "22673"
         }
@@ -104,6 +104,12 @@
     "file_write_permissions": [
       {
         "path": "npm-debug.log"
+      }
+    ],
+    "persistent_directories": [
+      {
+        "path": "/home/app/content",
+        "volume_name": "content"
       }
     ]
   }
