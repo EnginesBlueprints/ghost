@@ -28,12 +28,12 @@
         "url": "https://opensource.org/licenses/MIT"
       }
     },
-    "timestamp": "2018-02-22T18:11:13+11:00"
+    "timestamp": "2018-03-02T12:33:34+11:00"
   },
   "software": {
     "base": {
       "name": "ghost",
-      "framework": "node6.9",
+      "framework": "node7.2",
       "deployment_type": "web",
       "http_protocol": "http_and_https",
       "framework_port_override": 9001,
