@@ -28,7 +28,7 @@
         "url": "https://opensource.org/licenses/MIT"
       }
     },
-    "timestamp": "2018-03-02T18:08:56+11:00"
+    "timestamp": "2018-12-17T18:35:32+11:00"
   },
   "software": {
     "base": {
@@ -52,7 +52,7 @@
       },
       "install": {
         "language": "sh",
-        "content": "#!/bin/bash\r\n\r\n\r\nnpm i -g ghost-cli"
+        "content": "#!/bin/sh\r\ncd /home/app\r\n\r\nnpm install  ghost-cli@latest\r\n\r\nmkdir /home/app/ghost\r\ncd /home/app/ghost\r\n\r\nHOME=/home/app ghost install --db mysql --dbhost $dbhost --dbuser $dbuser --dbpass $dbpasswd --mail smtp --mailhost smtp --mailport 25 --ip 0.0.0.0 --port 8000 --url _Engines_Builder(http_protocol)://_Engines_Builder(fqdn) local"
       },
       "post_install": {
         "language": "sh",
@@ -103,7 +103,8 @@
     },
     "file_write_permissions": [
       {
-        "path": "npm-debug.log"
+        "path": "/home/app",
+        "recursive": true
       }
     ],
     "persistent_directories": [
