@@ -28,7 +28,7 @@
         "url": "https://opensource.org/licenses/MIT"
       }
     },
-    "timestamp": "2018-12-17T18:35:32+11:00"
+    "timestamp": "2018-12-18T11:40:45+11:00"
   },
   "software": {
     "base": {
@@ -48,11 +48,14 @@
     "scripts": {
       "start": {
         "language": "sh",
-        "content": "#!/bin/bash\r\nPID_FILE=/home/engines/run/pid\r\nexport PID_FILE\r\n\r\n. /home/engines/functions/trap.sh\r\n\r\ncd /home/app\r\n\r\n\r\nghost start\r\nstartup_complete\r\nwhile ! test -f /home/engines/run/flags/sig_term\r\n do\r\n sleep 10&\r\n echo $! > $PID_FILE\r\n wait\r\ndone\r\n\r\nghost stop\r\n\r\n\r\nshutdown_complete\r\n\r\nexit"
+        "content": "#!/bin/bash\r\nPID_FILE=/home/engines/run/pid\r\nexport PID_FILE\r\n\r\n. /home/engines/functions/trap.sh\r\n\r\ncd /home/app\r\n\r\n\r\n/home/app/node_modules/ghost-cli/bin/ghost start\r\nstartup_complete\r\nwhile ! test -f /home/engines/run/flags/sig_term\r\n do\r\n sleep 10&\r\n echo $! > $PID_FILE\r\n wait\r\ndone\r\n\r\n/home/app/node_modules/ghost-cli/bin/ghost stop\r\n\r\n\r\nshutdown_complete\r\n\r\nexit"
       },
       "install": {
         "language": "sh",
-        "content": "#!/bin/sh\r\ncd /home/app\r\n\r\nnpm install  ghost-cli@latest\r\n\r\nmkdir /home/app/ghost\r\ncd /home/app/ghost\r\n\r\nHOME=/home/app ghost install --db mysql --dbhost $dbhost --dbuser $dbuser --dbpass $dbpasswd --mail smtp --mailhost smtp --mailport 25 --ip 0.0.0.0 --port 8000 --url _Engines_Builder(http_protocol)://_Engines_Builder(fqdn) local"
+        "content": "#!/bin/sh\r\ncd /home/app\r\n\r\nnpm install  ghost-cli@latest\r\n\r\nmkdir /home/app/ghost\r\ncd /home/app/ghost\r\n\r\nHOME=/home/app/ /home/app/node_modules/ghost-cli/bin/ghost   install --db mysql --dbhost $dbhost --dbuser $dbuser --dbpass $dbpasswd --mail smtp --mailhost smtp --mailport 25 --ip 0.0.0.0 --port 8000 --url _Engines_Builder(http_protocol)://_Engines_Builder(fqdn) local"
+      },
+      "first_run": {
+        "content": " #!/bin/sh\r\n \r\n cp /home/app/ghost/config.development.json /home/fs/content/config.production.json\r\n ln -s /home/fs/content/config.production.json /home/app/ghost"
       },
       "post_install": {
         "language": "sh",
@@ -96,6 +99,14 @@
           "type": "boolean",
           "label": "DEBUG"
         }
+      },
+      {
+        "name": "HOME",
+        "value": "/home/app",
+        "immutable": true,
+        "input": {
+          "type": "boolean"
+        }
       }
     ],
     "database_seed": {
@@ -109,7 +120,7 @@
     ],
     "persistent_directories": [
       {
-        "path": "/home/app/content",
+        "path": "/home/app/ghost/content",
         "volume_name": "content"
       }
     ]
