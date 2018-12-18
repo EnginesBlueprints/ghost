@@ -28,7 +28,7 @@
         "url": "https://opensource.org/licenses/MIT"
       }
     },
-    "timestamp": "2018-12-18T11:40:45+11:00"
+    "timestamp": "2018-12-18T11:58:04+11:00"
   },
   "software": {
     "base": {
@@ -52,10 +52,10 @@
       },
       "install": {
         "language": "sh",
-        "content": "#!/bin/sh\r\ncd /home/app\r\n\r\nnpm install  ghost-cli@latest\r\n\r\nmkdir /home/app/ghost\r\ncd /home/app/ghost\r\n\r\nHOME=/home/app/ /home/app/node_modules/ghost-cli/bin/ghost   install --db mysql --dbhost $dbhost --dbuser $dbuser --dbpass $dbpasswd --mail smtp --mailhost smtp --mailport 25 --ip 0.0.0.0 --port 8000 --url _Engines_Builder(http_protocol)://_Engines_Builder(fqdn) local"
+        "content": "#!/bin/sh\r\ncd /home/app\r\n\r\nHOME=/home/app/ npm install  ghost-cli@latest\r\n\r\nmkdir /home/app/ghost\r\ncd /home/app/ghost\r\n\r\nHOME=/home/app/ /home/app/node_modules/ghost-cli/bin/ghost   install --db mysql --dbhost $dbhost --dbuser $dbuser --dbpass $dbpasswd --mail smtp --mailhost smtp --mailport 25 --ip 0.0.0.0 --port 8000 --url _Engines_Builder(http_protocol)://_Engines_Builder(fqdn) local"
       },
       "first_run": {
-        "content": " #!/bin/sh\r\n \r\n cp /home/app/ghost/config.development.json /home/fs/content/config.production.json\r\n ln -s /home/fs/content/config.production.json /home/app/ghost"
+        "content": " #!/bin/sh\r\n \r\n cp /home/app/ghost/config.development.json /home/fs/persist/config.production.json\r\n rm /home/app/ghost/config.development.json \r\n ln -s /home/fs/persist/config.production.json /home/app/ghost\r\n \r\n cp -r /home/app/ghost/content /home/fs/persist/\r\n rm -r /home/app/ghost/content\r\nln -s /home/fs/persist/content  /home/app/ghost/content"
       },
       "post_install": {
         "language": "sh",
@@ -70,7 +70,7 @@
         "publisher_namespace": "EnginesSystem",
         "type_path": "filesystem/local/filesystem",
         "variables": {
-          "engine_path": "",
+          "engine_path": "/home/fs/persist",
           "permissions": "rw",
           "volume_src": " ",
           "service_name": "content",
@@ -116,12 +116,6 @@
       {
         "path": "/home/app",
         "recursive": true
-      }
-    ],
-    "persistent_directories": [
-      {
-        "path": "/home/app/ghost/content",
-        "volume_name": "content"
       }
     ]
   }
